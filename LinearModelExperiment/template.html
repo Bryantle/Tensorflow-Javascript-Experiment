@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.5"> </script>
+    <script>
+      const model = tf.sequential();
+      model.add(tf.layers.dense({unit:1, inputShape:[1]}));
+      //describe the dense layer: how many layers does it have. We want to return 1 unit from the input layer.
+      //We take in 1 value (inputShape) for this model.
+      model.add(tf.layers.dense({unit:64, inputShape:[1]}));
+      //We want our hidden layer to output 64 units and take in 1 value.
+      model.add(tf.layers.dense({unit:1, inputShape:[64]}));
+      //We want our output layer to take in 64 units from the hidden layer and return 1 value.
+      model.compile({loss: "meanSquaredError", optimizer: "sgd"});
+      //At this point, we have defined our model. Now, we just need to input some data.
+      const xs = [1,2,3,4,5]
+      const ys = [1,2,3,4,5]
+      model.fit(tf.tensor2d(xs, [5,1]), tf.tensor2d(ys, [5,1]);
+      //We want our input to be as explicit as possible so we specify shape of tensor.
+      model.predict(tf.tensor2d([6], [1,1])).dataSync();
+      //We are passing in our input (6) and specifying the shape for the tensor we are passing in.
+      //predict simply calculates out ouput. dataSync will return the output value.
+      //If data not accurate, we can (1)have more training data or (2) increasing epochs.
+      //Epochs are learning rates of the model.
+      model.fit(tf.tensor2d(xs, [5,1]), tf.tensor2d(ys, [5,1]), {epochs: 150, shuffle: true})
+      //fit can take in more args. than you think.
+      model.predict(tf.tensor2d([6], [1,1])).dataSync();
+      //We will now get a much more accurate number. 
+
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
