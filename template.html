@@ -1,6 +1,19 @@
 <html>
   <head>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.5"> </script>
+    <script>
+      const model = tf.sequential();
+      model.add(tf.layers.dense({unit:1, inputShape:[1]}));
+      //describe the dense layer: how many layers does it have. We want to return 1 unit from the input layer.
+      //We take in 1 value (inputShape) for this model.
+      model.add(tf.layers.dense({unit:64, inputShape:[1]}));
+      //We want our hidden layer to output 64 units and take in 1 value.
+      model.add(tf.layers.dense({unit:1, inputShape:[64]}));
+      //We want our output layer to take in 64 units from the hidden layer and return 1 value.
+      model.compile({loss: "meanSquaredError", optimizer: "sgd"});
+      //At this point, we have defined our model. Now, we just need to input some data.
+    
+    </script>
   </head>
   <body>
   </body>
